@@ -135,8 +135,10 @@
   <ItemGroup>
     <ClInclude Include="AVL.h" />
     <ClInclude Include="BH.h" />
-    <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="BST.h" />
+    <ClInclude Include="Hashing.h" />
+    <ClInclude Include="Huffman.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Source.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

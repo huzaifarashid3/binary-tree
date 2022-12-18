@@ -1,5 +1,4 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 class node
 {
@@ -13,24 +12,43 @@ public:
 	node() : data(0), height(0), left(NULL), right(NULL)
 	{}
 };
+
+class huffNode
+{
+public:
+	huffNode* left = NULL;
+	huffNode* right = NULL;
+	int frequency = 0;
+	char data = ' ';
+	string code = "";
+	huffNode(int f, huffNode* l, huffNode* r) {}
+};
+
 #include "AVL.h"
 #include "BST.h"
 #include "BH.h"
-#include "BinaryTree.h":
+#include "Huffman.h"
+#include "Hashing.h"
+//#include "Queue.h"
+
+
+
 
 int main(void)
 {
+	int arr[] = { 50, 700, 76, 85, 92, 73, 101 };
+	int size = sizeof(arr) / sizeof(int);
+	HashTable table(size);
 
-	int arr[10] = { 10,6,3,2,1,4,11,12,14,13};
+	for (int i = 0; i < size; i++)
+	{
+		table.Insert(arr[i]);
+	}
+	table.Insert(1);
 
-	BinaryHeap bh(10);
+	table.print();
 
-	for (int i = 0; i < 4; i++)
-		bh.Insert(arr[i]);
-
-	/*cout << bh.Extract() << endl;
-	cout << bh.Extract() << endl;
-	cout << bh.Extract() << endl;*/
-
+	
+	
 	return 0;
 }

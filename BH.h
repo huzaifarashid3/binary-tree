@@ -1,119 +1,78 @@
 #pragma once
 
-class BinaryHeap
+template<typename T>
+class Heap
 {
 	int capacity;
 	int size;
-	int* arr;
+	T* arr;
 public:
-	BinaryHeap(int capacity): capacity(capacity), size(0), arr(new int[capacity]) {}
-	
-	int LeftChildI(int i) {	return 2 * i + 1; }
-	
-	int RightChildI(int i) { return 2 * i + 2; }
+	Heap(int capacity = 10): size(0), capacity(capacity), arr(new T[capacity]) {}
+	T Insert(T data)
+	{	
+			arr[size] = data;
+			size++;
+			HeapifyUp();
+			return data;
 
-	int ParentI(int i) { return (i - 2) / 2; }
-
-	int LeftChild(int i) { return arr[LeftChildI(i)]; }
-
-	int RightChild(int i) { return arr[RightChildI(i)]; }
-
-	int Parent(int i) { return arr[ParentI(i)]; }
-
-	bool HasParent(int i)
-	{ 
-		if (ParentI(i) >= 0) return true;
-		return false;
 	}
 
-	bool HasLeftChild(int i) 
-	{ 
-		if (LeftChildI(i) < size) 
-			return true;
-		return false;
-	}
-
-	bool HasRightChild(int i)
+	T Extract()
 	{
-		if (RightChildI(i) < size)
-			return true;
-		return false;
-	}
+		T temp = arr[0];
 
-	void Insert(int data)
-	{
-		EnsureCapacity();
-		arr[size] = data;
-		size++;
-		HeapifyUp();
-	}
-	
-	void HeapifyUp()
-	{
-		int i = size - 1;
-		while (HasParent(i) && Parent(i) > arr[i])
-		{
-			swap(arr[ParentI(i)], arr[i]);
-			i = ParentI(i);
-		}
+		arr[0] = arr[size - 1];
+		size--;
+
+		HeapifyDown();
+
+
+
+		return temp;
 	}
 
 	void HeapifyDown()
 	{
-		int i = 0;
-		while (HasLeftChild(i))
-		{
-			int child = LeftChildI(i);
-			if (HasRightChild(i))
-				if (RightChild(i) < LeftChild(i))
-					child = RightChildI(i);
-			if (arr[i] > arr[child])
-				swap(arr[child], i);
-			i = child;
-		}
+		int me = 0;
+		int l = 2 * me + 1;
+		int r = 2 * me + 2;
 
+		while (l < size)
+		{
+			int t = l;
+			if (r < size && arr[r]->frequency < arr[l]->frequency)
+				t = r;
+
+			if (arr[me]->frequency < arr[t]->frequency)
+				break;
+			else
+				swap(arr[me], arr[t]);
+
+
+			me = t;
+
+			l = 2 * me + 1;
+			r = 2 * me + 2;
+		}	
 	}
 
-	void EnsureCapacity()
+	void HeapifyUp()
 	{
-		if (size == capacity)
+		int me = size - 1;
+		while ((me - 2) / 2 >= 0 && arr[me]->frequency < arr[(me - 2) / 2]->frequency)
 		{
-			int* temp = new int[2 * capacity];
-			for (int i = 0; i < size; i++)
-				temp[i] = arr[i];
-			delete[] arr;
-			arr = temp;
-			capacity *= 2;
-		}
+			swap(arr[me], arr[(me - 2) / 2]);
+			me = (me - 2) / 2;
+		}	
 	}
 
-	int peek()
+	T Peek()
 	{
-		if (size == 0)
-		{
-			cout << "empty" << endl;
-			return -1;
-		}
 		return arr[0];
 	}
-	
-	int Extract()
-	{
-		if (size == 0)
-		{
-			cout << "empty" << endl;
-			return -1;
-		}
-		int data = peek();
-		arr[0] = arr[size-1];
-		size--;
-		HeapifyDown();
-		return data;
-	}
-	
-	~BinaryHeap()
+
+	~Heap()
 	{
 		delete[] arr;
 	}
-
 };

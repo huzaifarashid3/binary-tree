@@ -35,7 +35,13 @@
     <ClInclude Include="Source.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinaryTree.h">
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Huffman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hashing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
