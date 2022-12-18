@@ -136,6 +136,7 @@
     <ClInclude Include="AVL.h" />
     <ClInclude Include="BH.h" />
     <ClInclude Include="BST.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="Hashing.h" />
     <ClInclude Include="Huffman.h" />
     <ClInclude Include="Queue.h" />

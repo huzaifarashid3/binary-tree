@@ -35,6 +35,12 @@ public:
 			return -1;
 		return max(1 + Height(root->right), 1 + Height(root->left));
 	}
+	int minHeight(node* root)
+	{
+		if (root == NULL)
+			return -1;
+		return min(1 + Height(root->right), 1 + Height(root->left));
+	}
 	int HeightTill(node* root, int data)
 	{
 		if (data < root->data)

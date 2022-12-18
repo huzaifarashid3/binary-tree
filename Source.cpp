@@ -1,5 +1,10 @@
 #include <iostream>
 using namespace std;
+#include <vector>
+#include <queue>
+#include <stack>
+
+
 class node
 {
 public:
@@ -24,29 +29,48 @@ public:
 	huffNode(int f, huffNode* l, huffNode* r) {}
 };
 
-#include "AVL.h"
+
 #include "BST.h"
-#include "BH.h"
-#include "Huffman.h"
-#include "Hashing.h"
-//#include "Queue.h"
+#include "Graph.h"
+
 
 
 
 
 int main(void)
 {
-	int arr[] = { 50, 700, 76, 85, 92, 73, 101 };
-	int size = sizeof(arr) / sizeof(int);
-	HashTable table(size);
+	gnode A;
+	gnode B;
+	gnode C;
+	gnode D;
 
-	for (int i = 0; i < size; i++)
-	{
-		table.Insert(arr[i]);
-	}
-	table.Insert(1);
 
-	table.print();
+
+	A.neighbours.push_back(&B);
+	A.neighbours.push_back(&D);
+
+
+	B.neighbours.push_back(&C);
+
+
+	C.neighbours.push_back(&A);
+	C.neighbours.push_back(&D);
+
+	D.neighbours.push_back(&B);
+	D.neighbours.push_back(&C);
+
+
+	Graph g;
+
+	g.BFS(&A, &B);
+
+
+	if (A.visited) cout << "A" << endl;
+	if (B.visited) cout << "B" << endl;
+	if (C.visited) cout << "C" << endl;
+	if (D.visited) cout << "D" << endl;
+
+
 
 	
 	
