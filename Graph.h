@@ -30,19 +30,21 @@ public:
 	void BFS(gnode* start, gnode* end)
 	{
 		queue<gnode*> tn;
-		start->visited = true;
 		tn.push(start);
-		while (tn.front() != end)
+		gnode* temp = tn.front();
+		while (temp != end)
 		{
-			for (auto& n : tn.front()->neighbours)
+			temp = tn.front();
+			tn.pop();
+			temp->visited = true;
+			for (auto& n : temp->neighbours)
 			{
 				if (!n->visited)
 				{
-					n->visited = true;
 					tn.push(n);
 				}
 			}
-			tn.pop();
+			
 		}
 
 	}

@@ -1,21 +1,34 @@
 #pragma once
 
+class node
+{
+public:
+	node* left;
+	node* right;
+	int data;
+	int height;
+	node(int d, int height = 0, node* left = NULL, node* right = NULL) : data(d), height(height), left(left), right(right)
+	{}
+	node() : data(0), height(0), left(NULL), right(NULL)
+	{}
+};
+
 class BST
 {
 public:
 	BST() {}
-	void Insert(node** root, int data)
+	node* Insert(node* root, int data)
 	{
-		node* newNode = new node(data);
-		if (*root == NULL)
+		if (root == NULL)
 		{
-			*root = newNode;
+			root = new node(data);
 		}
-		else if (data <= (*root)->data)
-			Insert(&((*root)->left), data);
-		else if (data > (*root)->data)
-			Insert(&((*root)->right), data);
+		else if (data <= root->data)
+			root->left = Insert(root->left, data);
+		else if (data > root->data)
+			root->right = Insert(root->right, data);
 
+		return root;
 
 	}
 	node* Search(node* root, int data)
@@ -76,6 +89,23 @@ public:
 		Postorder(root->left);
 		Postorder(root->right);
 		cout << root->data << " ";
+	}
+	void LevelOrder(node* root)
+	{
+		if (root == NULL)
+			return;
+		queue<node*> q;
+		q.push(root);
+		while (!q.empty())
+		{
+			node* current = q.front();
+			cout << current->data << " ";
+			q.pop();
+			if (current->left != NULL)
+				q.push(current->left);
+			if (current->right != NULL)
+				q.push(current->right);
+		}
 	}
 	node* FindMin(node* root)
 	{
@@ -138,17 +168,9 @@ public:
 	{
 		return FindMax(Search(root, data)->left)->data;
 	}
-	int BFS_Search()
-	{
-
-	}
-	int DFS_Search()
-	{
-
-	}
 	void Display(node* root)
 	{
-		Preorder(root);
+		
 	}
 	void DeleteBST(node** root)
 	{
